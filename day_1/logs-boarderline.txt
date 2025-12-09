@@ -1,0 +1,32 @@
+PS D:\personal\protovoid_tech\data_scrapping\yeefyed\qudobeauty.com> python3 .\scrapper.py
+Collecting product URLs...
+Total product URLs found: 5
+Scraping Products:   0%|                                                                                              | 0/5 [00:00<?, ?it/s]
+Found 19 p tags in description.
+Quantity from -- quantity:70 padsexpiration date:on the packaging.country of origin:south korea.
+Scraping Products:  20%|██████████████████▊                                                                           | 1/5 [00:02<00:10,  2.69s/it]
+Scraped → SKIN1004 – Madagasar Centella Quick Calming Pad 70 Pcs
+Found 20 p tags in description.
+Capacity from -- capacity:trial size kitexpiration date:on the packaging.country of origin:south korea.
+Scraping Products:  40%|█████████████████████████████████████▌                                                        | 2/5 [00:02<00:03,  1.23s/it]
+Scraped → Round Lab – Pine Calming Cica Trial Kit
+Found 19 p tags in description.
+Capacity from -- capacity:50 mlexpiration date:see packaging.country of origin:south korea.
+Trying single paragraph extraction for ingredients.
+Found 15 p tags in description.
+Capacity from -- capacity:30 mlexpiration date:see packaging.country of origin:south korea.
+Scraped → A’Pieu – Glycolic Acid Cream – 50ml
+Trying single paragraph extraction for ingredients.
+Scraping Products:  80%|███████████████████████████████████████████████████████████████████████████▏                  | 4/5 [00:03<00:00,  2.03it/s]
+Scraped → COSRX – Centella Blemish Cream – 30ml
+Found 15 p tags in description.
+Capacity from -- capacity:30 mlexpiration date:see packaging.country of origin:south korea.
+Trying single paragraph extraction for ingredients.
+Processed set saved (5 items)
+[After 5 products] Memory usage: 107.81 MB | CPU: 30.0%
+Scraped → Haruharu Wonder – Centella Phyto & 5 Peptide Concentrate Cream – 30ml
+Scraping Products: 100%|██████████████████████████████████████████████████████████████████████████████████████████████| 5/5 [00:03<00:00,  1.56it/s] 
+Processed set saved (5 items)
+CSV saved → qudo_moisturizers_full.csv
+Scraper exited gracefully.
+PS D:\personal\protovoid_tech\data_scrapping\yeefyed\qudobeauty.com> 

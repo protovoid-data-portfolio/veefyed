@@ -1,0 +1,49 @@
+Start
+  |
+  v
+Load processed set from JSON (if exists)
+  |
+  v
+Collect product URLs from category pages
+  |  (pagination handled, optional limit)
+  v
+For each product URL (ThreadPoolExecutor)
+  |
+  v
+Check if product already processed (thread-safe)
+  |-- Yes --> Skip
+  |-- No  --> Add to processed set
+  |
+  v
+Fetch product page HTML
+  |
+  v
+Parse product details:
+  |  - Product Name
+  |  - Brand
+  |  - Category
+  |  - SKU
+  |  - EAN
+  |  - Size/Packaging / Capacity
+  |  - Ingredients
+  |  - Product Image URL
+  |
+  v
+Download product image to disk
+  |
+  v
+Store product data in results list
+  |
+  v
+Periodically:
+  |  - Save processed set to JSON
+  |  - Print memory/CPU usage (optional)
+  |
+  v
+All products processed or interrupted
+  |
+  v
+Save final results to CSV
+  |
+  v
+Exit gracefully

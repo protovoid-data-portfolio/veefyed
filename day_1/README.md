@@ -43,7 +43,7 @@ Scrapes moisturizer products from qudobeauty.com, including product metadata, in
 - threading, signal, os, json, re, urllib.parse
 
 ## Usage Example:
-> python qudo_scraper.py
+> python3 scraper.py
 
 - Resumes automatically if processed.json exists.
 - Save interval: every 5 products (configurable via SAVE_INTERVAL).
@@ -60,8 +60,8 @@ qudo_scraper/
 ├── scraper.py             # main scraper script
 ├── processed-30_products.json         # saved processed 30 products
 ├── processed-boarderline.json         # saved processed products that needed special attention
-├── qudo_products-30.csv  # final CSV for 30 products
-├── qudo_products-boarderline.csv  # final CSV for 5 products that needed special attention
+├── qudo_products-30.csv               # final CSV for 30 products
+├── qudo_products-boarderline.csv      # final CSV for 5 products that needed special attention
 ├── requirements.txt       # required packages for this scraper
 ├── README.md              # The readme file, containing the documentation
 └── images/                # downloaded product images
@@ -97,7 +97,7 @@ qudo_scraper/
 
     Created custom logic to parse multiple `<span>` elements inside product_meta for brand/category.
 
-    Extracted capacity and ingredients from `<p>` tags between Product contains: and Product effects:
+    Extracted capacity and ingredients from `<p>` tags between `Product contains:` and `Product effects:`
 
 5. *Non-ASCII Characters*
 

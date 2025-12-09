@@ -48,7 +48,7 @@ Scrapes moisturizer products from qudobeauty.com, including product metadata, in
 - Resumes automatically if processed.json exists.
 - Save interval: every 5 products (configurable via SAVE_INTERVAL).
 - Images saved to images/ folder.
-- CSV saved as qudo_moisturizers_full.csv.
+- CSV saved as qudo_products.csv.
 
 
 ## Folder Structure:
@@ -107,6 +107,6 @@ qudo_scraper/
 
 6. *Periodic Saving*
 
-    Issue: Scraper could fail mid-run due to network issues or site changes.
+    **Issue**: Scraper could fail mid-run due to network issues or site changes.
 
-    Solution: Implemented periodic saving of the processed set every SAVE_INTERVAL products.
+    **Solution**: Implemented periodic saving of the processed set every SAVE_INTERVAL products.

@@ -91,13 +91,13 @@ qudo_scraper/
 
     **Issue 1**: Some data fields (Brand, Category, SKU, EAN) were inconsistently formatted across products.
 
-    **Issue 2**: Product capacity and ingredients were buried inside HTML <p> tags or text sections.
+    **Issue 2**: Product capacity and ingredients were buried inside HTML `<p>` tags or text sections.
 
     **Solution**:
 
-    Created custom logic to parse multiple <span> elements inside product_meta for brand/category.
+    Created custom logic to parse multiple `<span>` elements inside product_meta for brand/category.
 
-    Extracted capacity and ingredients from <p> tags between Product contains: and Product effects:
+    Extracted capacity and ingredients from `<p>` tags between Product contains: and Product effects:
 
 5. *Non-ASCII Characters*
 

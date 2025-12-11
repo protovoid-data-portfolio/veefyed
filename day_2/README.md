@@ -69,56 +69,40 @@ qudo_scraper/
 </pre>
 
 
-## Issues Encountered
-1. *Duplicate Products*
+## Q & A
 
-    **Issue**: Some products could appear on multiple pages, risking duplicates.
+1. *API Usage*
 
-    **Solution**: Maintained a thread-safe processed set to track products already scraped.
-
-2. *Multi-threading & Thread Safety*
-
-    **Issue**: Using ThreadPoolExecutor for parallel scraping could cause race conditions when updating the processed set or results list.
-
-    **Solution**: Added locks (processed_lock, results_lock, print_lock) to ensure thread-safe operations.
-
-3. *Interrupt Handling*
-
-    **Issue**: Long scraping runs could be interrupted by the user (Ctrl+C), causing partial data loss.
-
-    **Solution**: Implemented signal handling with a stop flag to gracefully exit and save progress to JSON.
-
-4. *Product Details Extraction*
-
-    **Issue 1**: Some data fields (Brand, Category, SKU, EAN) were inconsistently formatted across products.
-
-    **Issue 2**: Product capacity and ingredients were buried inside HTML `<p>` tags or text sections.
-
-    **Solution**:
-
-    Created custom logic to parse multiple `<span>` elements inside product_meta for brand/category.
-
-    Extracted capacity and ingredients from `<p>` tags between Product contains: and Product effects:
-
-5. *Non-ASCII Characters*
-
-    **Issue**: Product names, Brand and ingredients contain characters like â€“, â€™, â‰ˆ, which appear due to mis-decoding of UTF-8 as Windows-1252.
-
-    **Solution**: Added a sanitize_text function to normalize these characters and replace them with proper Unicode equivalents.
-
-6. *Periodic Saving*
-
-    **Issue**: Scraper could fail mid-run due to network issues or site changes.
-
-    **Solution**: Implemented periodic saving of the processed set every SAVE_INTERVAL products.
-
-7. *API Usage*
-
-    **Details**: Google's custom Search API was used along with dynamic query, built using already scrapped information
+    **Google Custom Search API (CSE):**
+    
+    Google's custom Search API was used along with dynamic query, built using already scrapped information
     The enrichment module has the capability to build multiple search queries BUT a single one was used due to free tier limit (100 requests per day)
-    - "{product_name} {brand} official ingredients"
+    - query: `"{product_name} {brand} official ingredients"`
 
-8. *Data Validation Logic*
+    Each query is sent using:
+
+    <pre>params = {
+        "key": GOOGLE_API_KEY,
+        "cx": GOOGLE_CX,
+        "q": query,
+        "num": GOOGLE_NUM_RESULTS
+    }</pre>
+
+    > response = requests.get(GOOGLE_SEARCH_URL, params=params)
+
+    <br/>
+
+    **How responses were used**
+
+    For each API response:
+
+    - Collect all search results (items)
+    - Compute a “relevance score” for every result
+    - Sort results by score (highest first)
+    - Loop through results and enrich only the missing fields
+
+
+2. *Data Validation Logic*
     - Input Validation (during scraping)
 
         - HTML elements checked before use.
@@ -140,7 +124,7 @@ qudo_scraper/
             - skincarisma
             - paulaschoice
 
-10. *How reliability is determined*
+3. *How reliability is determined*
 
     Google search results are not blindly accepted.
     
@@ -152,40 +136,4 @@ qudo_scraper/
     - Brand match inside displayLink
     - search result containing links from `ingredient analysis websites` (incidecoder, cosdna, skincarisma, paulaschoice) are considered very reliable
     - Looping through Ranked Results to pick/populate from highest-ranked once first
-
-
-<br/>
-<br/>
-<br/>
-
----
-# QudoBeauty Scraper (modular)
-
-## 1. Setup
-
-   - Create virtualenv and install requirements:
-       
-       python -m venv venv
-       
-       source venv/bin/activate
-       
-       pip3 install -r requirements.txt
-
-   - create .env and fill in:
-       
-       GOOGLE_API_KEY, GOOGLE_CX (optional; if not provided enrichment is skipped)
-
-   - Edit config.json if you need to change settings.
-
-## 2. Run
-
-   - python3 scraper.py
-
-   The script:
-     
-    - resumes from processed.json if found,
-     
-    - saves images into images/,
-     
-    - writes CSV to config.json's CSV_OUTPUT (utf-8-sig).
 
